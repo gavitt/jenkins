@@ -1,26 +1,37 @@
 # test_app.py
 
-import unittest
-from app import app  # Import the Flask application from app.py
+import pytest
+from flask_testing import TestCase
+
+from app import app  # Импортируйте app из вашего основного файла
 
 
-class BasicTestCase(unittest.TestCase):
+class MyTest(TestCase):
 
-    def setUp(self):
-        # Set up the test client
+    def create_app(self):
+        # Создание экземпляра тестового клиента вашего приложения Flask
         app.config['TESTING'] = True
-        self.app = app.test_client()
+        return app
 
     def test_home(self):
-        # Send a GET request to the '/' route
-        response = self.app.get('/')
-
-        # Check if the response status code is 200 (OK)
+        # Отправляем HTTP GET запрос на главную страницу и проверяем результат
+        response = self.client.get('/')
+        # проверяем, что статус-код ответа равен 200
         self.assertEqual(response.status_code, 200)
-
-        # Check if the response data is what we expect
+        # проверяем что тело ответа соответствует ожидаемому
         self.assertEqual(response.data.decode('utf-8'), 'Привет, мир!')
 
+# Фикстура pytest для упрощения доступа к тестовому клиенту Flask
 
-if __name__ == '__main__':
-    unittest.main()
+
+@pytest.fixture
+def client():
+    with app.test_client() as client:
+        yield client
+
+
+def test_home_pytest(client):
+    """Тест главной страницы с использованием фикстуры pytest"""
+    response = client.get('/')
+    assert response.status_code == 200
+    assert response.data.decode('utf-8') == 'Привет, мир!'
