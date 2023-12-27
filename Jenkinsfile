@@ -3,17 +3,17 @@ pipeline {
     agent any
 
     stages {
-        stage('Ws-Cleanup') {
-            steps {
-                cleanWs()
-            }
-        }
-        stage('Checkout') {
-            steps {
-                // Забрать код из системы контроля версий (например, Git)
-                git 'https://github.com/gavitt/jenkins.git'
-            }
-        }
+//        stage('Ws-Cleanup') {
+//            steps {
+//                cleanWs()
+//            }
+//       }
+//       stage('Checkout') {
+//            steps {
+//                // Забрать код из системы контроля версий (например, Git)
+//                git 'https://github.com/gavitt/jenkins.git'
+//            }
+//        }
         stage('Unit Test') {
             steps {
                 // Запуск unit тестов используя, например, junit для Java или pytest для Python
