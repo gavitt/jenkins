@@ -25,7 +25,7 @@ pipeline {
             post {
                 always {
                     // Сбор результатов тестов для Jenkins
-                    junit 'report.xml'
+                    junit 'python-simple-app/report.xml'
                 }
             }
         }
