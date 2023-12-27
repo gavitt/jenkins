@@ -3,10 +3,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+//        stage('Checkout') {
+//            steps {
+//                // Забрать код из системы контроля версий (например, Git)
+//                git 'https://github.com/gavitt/jenkins.git'
+//            }
+//        }
+        stage('Ws-Cleanup') {
             steps {
-                // Забрать код из системы контроля версий (например, Git)
-                git 'https://github.com/gavitt/jenkins.git'
+                cleanWs()
             }
         }
         stage('Unit Test') {
