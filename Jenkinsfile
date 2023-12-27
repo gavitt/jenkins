@@ -19,7 +19,7 @@ pipeline {
                 // Запуск unit тестов используя, например, junit для Java или pytest для Python
                 sh '''
                     cd python-simple-app
-                    pytest -v --junitxml=report.xml
+                    /var/lib/jenkins/.local/bin/pytest -v --junitxml=report.xml
                     '''
             }
             post {
