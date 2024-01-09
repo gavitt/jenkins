@@ -25,7 +25,9 @@ pipeline {
             post {
                 always {
                     // Сбор результатов тестов для Jenkins
-                    junit 'python-simple-app/report.xml'
+                    junit skipPublishingChecks: true, testResults: 'python-simple-app/report.xml'
+
+                    //junit 'python-simple-app/report.xml'
                 }
             }
         }
