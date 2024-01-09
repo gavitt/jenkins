@@ -29,18 +29,18 @@ pipeline {
                 }
             }
         }
-        post('Upload to Jira') {
-            always {
-                step([
-                        $class                    : 'TestResultSenderBuildStep',
-                        jiraURL                   : 'https://jira.iskrauraltel.ru/',
-                        jiraUserName              : 'gluhov',
-                        jiraPassword              : hudson.util.Secret.fromString(SECRET),
-                        testResultsDirectory      : 'python-simple-app/*.xml',
-                        testResultsType           : 'JUNIT',
-                        missingTestPlanKeyStrategy: 'FAIL_TASK'
-                ])    
-            }
+    }
+    post('Upload to Jira') {
+        always {
+            step([
+                    $class                    : 'TestResultSenderBuildStep',
+                    jiraURL                   : 'https://jira.iskrauraltel.ru/',
+                    jiraUserName              : 'gluhov',
+                    jiraPassword              : hudson.util.Secret.fromString(SECRET),
+                    testResultsDirectory      : 'python-simple-app/*.xml',
+                    testResultsType           : 'JUNIT',
+                    missingTestPlanKeyStrategy: 'FAIL_TASK'
+            ])    
         }
     }
 }
