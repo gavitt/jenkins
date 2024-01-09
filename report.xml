@@ -1,1 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="0.076" timestamp="2024-01-09T19:15:22.119560" hostname="aglukhov-itt"><testcase classname="python-simple-app.test_app" name="test_home_pytest" time="0.003" /></testsuite></testsuites>
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.084" timestamp="2024-01-09T19:34:49.052865" hostname="aglukhov-itt"><testcase classname="python-simple-app.test_app" name="test_home_pytest" time="0.003"><failure message="AssertionError: assert 'Привет_, мир!!!' == 'Привет, мир!'&#10;  - Привет, мир!&#10;  + Привет_, мир!!!&#10;  ?       +      ++">client = &lt;FlaskClient &lt;Flask 'app'&gt;&gt;
+
+    def test_home_pytest(client):
+        """Тест главной страницы с использованием фикстуры pytest"""
+        response = client.get('/')
+        assert response.status_code == 200
+&gt;       assert response.data.decode('utf-8') == 'Привет, мир!'
+E       AssertionError: assert 'Привет_, мир!!!' == 'Привет, мир!'
+E         - Привет, мир!
+E         + Привет_, мир!!!
+E         ?       +      ++
+
+python-simple-app/test_app.py:18: AssertionError</failure></testcase></testsuite></testsuites>
